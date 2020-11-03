@@ -1,0 +1,38 @@
+<section>
+  <h2>Men's Dress Shoes</h2>
+  <p><small>Showing 1-10 of 1116</small></p>
+  <div class="button-bar">
+    <div class="button-bar-item">
+      <button class="btn" type="button">FILTER</button>
+    </div>
+    <div class="button-bar-item">
+      <select
+        #mySelect
+        (change)='onOptionsSelected(mySelect.value)'>
+        <option value="">Featured</option>
+        <option value="rating">Top Rated</option>
+        <option value="price">Price</option>
+      </select>
+    </div>
+  </div>
+
+  <ul class="product-list" *ngIf="products">
+    <li class="product" *ngFor="let product of products">
+      <img class="product-img" src="/assets/images/products/{{product.id}}.jpg">
+      <ul class="color-list" *ngIf="product.colors">
+        <li class="color-list-item" [ngClass]="{'active' : color.id == product.activeColor}" *ngFor="let color of product.colors"
+          [ngStyle]="{'background-color': color.displayName}">
+          <span class="sr-only">{{color.displayName}}</span>
+        </li>
+      </ul>
+      <h3>{{product.brand}}</h3>
+      <h4>{{product.name}}</h4>
+      <div>{{product.price | currency}}</div>
+      <div class="comp-value">Comp. value {{product.compValue | currency}}</div>
+      <div class="star-rating" *ngIf="product.rating">
+        <span class="star-rating-empty">&#9733; &#9733; &#9733; &#9733; &#9733;</span>
+        <span class="star-rating-filled" [ngStyle]="{'width': product.rating*20+'%'}">&#9733; &#9733; &#9733; &#9733; &#9733;</span>
+      </div>
+    </li>
+  </ul>
+</section>
